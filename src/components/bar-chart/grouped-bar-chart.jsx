@@ -1,18 +1,17 @@
 import {useEffect, useRef} from "react";
 import * as d3 from "d3";
+import styles from "./bar-chart.module.css"
 
-
-const GroupedBarChat=({...props})=>{
+const GroupedBarChart=({...props})=>{
 const data = props.data;
 const barRef = useRef(null)
-    var formatTime = d3.timeFormat("%B %d, %Y");
-    console.log(formatTime(data[0].date))
+
     var formatTime = d3.timeFormat("%B");
 
 
-    const createBar =()=>{
+    const createBar = async()=>{
 
-        const margin = {top: 10, right: 30, bottom: 20, left: 60},
+        const margin = {top: 10, right: 30, bottom: 20, left: 80 },
             width = 860 - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom,
             barPadding = .2,
@@ -34,7 +33,7 @@ const barRef = useRef(null)
 
         xScale0.domain(props.data.map(d => formatTime(d.date)))
         xScale1.domain(['profit','revenue']).range([0,xScale0.bandwidth()])
-        yScale.domain([0,d3.max(data, d => d.revenue)])
+        yScale.domain([0, d3.max(data, d => Math.max(d.profit, d.revenue))]).nice();
 
         var groups = svg.selectAll(".groups")
             .data(data)
@@ -47,7 +46,7 @@ const barRef = useRef(null)
             .enter()
             .append("rect")
             .attr("class", "bar field1")
-            .style("fill","blue")
+            .style("fill","#936DDC")
             .attr("x", d => xScale1("profit"))
             .attr("y", d => yScale(d.profit))
             .attr("width", xScale1.bandwidth())
@@ -59,7 +58,7 @@ const barRef = useRef(null)
             .enter()
             .append("rect")
             .attr("class", "bar field2")
-            .style("fill","red")
+            .style("fill","#1A4170FF")
             .attr("x", d => xScale1('revenue'))
             .attr("y", d => yScale(d.revenue))
             .attr("width", xScale1.bandwidth())
@@ -87,22 +86,22 @@ const barRef = useRef(null)
     useEffect(
 
         ()=>{
-            if (data.length && data[0].date){   if (isDate(data.length && data[0].date))
-                createBar()
-            };
+            if (data.length && data[0].date && isDate(data[0].date)) {
+                createBar();
+            }
 
 
 
 
 
-        },[])
+        },[data])
 return (
 
-        <div>
-              <div ref={barRef} > </div>
+        <div ref={barRef} className= {styles.container}>
+
         </div>
 )
 
 
 }
-export  default GroupedBarChat
+export  default GroupedBarChart

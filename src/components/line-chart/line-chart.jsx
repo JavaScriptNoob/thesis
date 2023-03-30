@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import *  as d3 from 'd3';
-import dataset from "../data.csv";
+import dataset from "../../data.csv";
 import {defaultKeyMap} from "@testing-library/user-event/dist/keyboard/keyMap";
 
 const LineChart = ({...props}) => {
@@ -19,7 +19,7 @@ const LineChart = ({...props}) => {
         // set the dimensions and margins of the graph
         const margin = {top: 20, right: 20, bottom: 50, left: 70},
             width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+            height = 600 - margin.top - margin.bottom;
         // append the svg object to the body of the page
         const svg = d3.select(chartRef.current).append("svg")
             .attr("width", width + margin.left + margin.right)

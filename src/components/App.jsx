@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+import logo from '../logo.svg';
 import React, {useState, useEffect, useRef} from 'react';
 import LineChart from "./line-chart/line-chart";
 import * as d3 from "d3";
-import dataset from "./data.csv";
-import GroupedBarChat from "./grouped-bar-chat";
-
+import dataset from "../data.csv";
+import GroupedBarChart from "./bar-chart/grouped-bar-chart";
+import Exa
 function App() {
     const [data, setData] = useState([]);
     const [keys, setKeys] = useState([])
@@ -40,13 +40,13 @@ function App() {
   return (
     <div className="App">
 
-      <header className="App-header">
+
 
           {data.length>0&&<><LineChart data={data} keys={keys}/>
-              <GroupedBarChat data={data} keys={keys}/>  </>}
+              <GroupedBarChart data={data} keys={keys}/> <Example></Example> </>}
 
 
-      </header>
+
     </div>
   );
 }
