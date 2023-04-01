@@ -2,11 +2,14 @@ import * as React from 'react';
 import {useEffect, useRef, useState} from "react";
 
 import * as d3 from "d3";
-import {create} from "d3";
 
-export const Chart = (props) => {
+import Viz from "./viz";
+
+
+const Piechart = (props) => {
     const data = props.data;
-    const [arrangedData, setArrangedData]=useState(null)
+    const [arrangedData, setArrangedData] = useState(null)
+    const [mutated, setMutated] = useState(false)
     const ref = useRef(null)
     console.log();
     useEffect(() => {
@@ -19,19 +22,27 @@ export const Chart = (props) => {
                 .map(([k, v]) => ({country: k, revenue: v}))
             console.log(df);
             setArrangedData(df)
+            setMutated(true)
+
         };
 
     }, []);
 
-    const createPie= ()=>{
-
-
-    }
 
     return (
-        <div ref={ref}>
-        Hello
+        <div>
+            <div>{mutated && arrangedData.map(data => {
+                return  <button>{data.country}</button>
+            })}
+            </div>
+            {mutated && <Viz data={arrangedData}/>
+            }
+
+
         </div>
+
+
     );
 
 }
+export default Piechart

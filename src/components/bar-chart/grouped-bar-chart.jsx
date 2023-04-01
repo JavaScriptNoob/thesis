@@ -9,7 +9,7 @@ const barRef = useRef(null)
     var formatTime = d3.timeFormat("%B");
 
 
-    const createBar = async()=>{
+    const createBar = ()=>{
 
         const margin = {top: 10, right: 30, bottom: 20, left: 80 },
             width = 860 - margin.left - margin.right,
@@ -78,22 +78,11 @@ const barRef = useRef(null)
             .call(yAxis);
     }
 
-    let isDate = function (input) {
-        return Object.prototype.toString.call(input) === "[object Date]";
-
-    };
 
     useEffect(
 
         ()=>{
-            if (data.length && data[0].date && isDate(data[0].date)) {
                 createBar();
-            }
-
-
-
-
-
         },[data])
 return (
 
