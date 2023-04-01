@@ -5,38 +5,22 @@ const Viz =(props)=>{
     const ref = useRef(null);
     const [state, setState] = useState(props.data);
     var parseTime = d3.timeParse("%d/%m/%Y");
-
-
-
-
-
-
     useEffect(() => {
         return () => {
-
-
            let arr =state[0].map((d,i)=> {(d.date =parseTime(d.date)); return d})
                 arr[0] =
-
             setState(arr[0])
-
             if (arr.length && arr.length>0){
-
                 setTimeout(createGraph, 200);
             }
-
         };
     }, []);
-
     const createGraph =  () => {
     function sortByDateAscending(a, b) {
         // Dates will be cast to numbers automagically:
         return a.date - b.date;}
-
         const    arr = state[0].sort(sortByDateAscending)
             console.log(arr, 'viz')
-
-
         console.log(state)
         // set the dimensions and margins of the graph
         const margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -48,14 +32,7 @@ const Viz =(props)=>{
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", `translate(${margin.left},     ${margin.top})`);
-        // const line = d3.line()
-        //     .x(d => x(d.date))
-        //     .y(d => y(d.revenue));
-
-
-
-            // Add X axis --> it is a date format
-            const x = d3.scaleTime()
+              const x = d3.scaleTime()
                 .domain(d3.extent(state[0], function(d) { return d.date; }))
                 .range([ 0, width ]);
             svg.append("g")
@@ -79,9 +56,6 @@ const Viz =(props)=>{
                     .x(function(d) { return x(d.date) })
                     .y(function(d) { return y(d.revenue) })
                 )
-
-
-
     }
     return <div ref={ref}></div>
 }

@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import LineChart from "./line-chart/line-chart";
 import * as d3 from "d3";
 
 import GroupedBarChart from "./bar-chart/grouped-bar-chart";
-import Piechart from "./chart/pie-chart";
+import Piechart from "./pie-chart/pie-chart";
 
 import dataset from "./data.json"
 

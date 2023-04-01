@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useRef, useState} from "react";
+import {useEffect,useState} from "react";
 
 import * as d3 from "d3";
 
@@ -10,7 +10,7 @@ const Piechart = (props) => {
     const data = props.data;
     const [arrangedData, setArrangedData] = useState(null)
     const [mutated, setMutated] = useState(false)
-    const ref = useRef(null)
+
     console.log();
     useEffect(() => {
         return () => {
